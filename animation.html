@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<title>Saadia Gabriel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body onload="load()">
+
+<div id ="myAnimation"></div>
+
+<script>
+var laps1 = 0;
+var laps2 = 0;
+
+function load(){
+	myMove();
+	myMove2();
+}
+
+function myMove() {
+  var elem = document.getElementById("myAnimation");    
+  var pos = -400;
+  var id = setInterval(frame, getRI(.01,20));
+  function frame() {
+   
+    if(pos < 2000){
+      pos++; 
+      
+      elem.style.left = pos + 'px'; 
+    }else{
+      clearInterval(id);
+      laps1++;
+      document.getElementById("score").innerHTML = laps1;
+      myMove();
+    }
+  }
+}
+
+function myMove2() {
+  var elem = document.getElementById("myAnimation2");    
+  var pos = -400;
+  var id = setInterval(frame, getRI(.01,20));
+  function frame() {
+   
+    if(pos < 2000){
+      pos++; 
+      
+      elem.style.left = pos + 'px'; 
+    }else{
+      clearInterval(id);
+      laps2++;
+      document.getElementById("score2").innerHTML = laps2;
+      myMove2();
+    }
+  }
+  
+}
+
+function getRI(min, max) {
+  return Math.random() * (max - min) + min;
+}
+</script>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card-2">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT</a>
+    <a href="projects.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PROJECTS</a>
+    <a href="cv_updated.pdf" class="w3-bar-item w3-button w3-padding-large w3-hide-small">RESUME</a>
+    <a href="contact.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="writing.html" class="w3-bar-item w3-button">Writing</a>
+        <a href="ilinks.html" class="w3-bar-item w3-button">Interesting Links</a>
+        <a href="musings.html" class="w3-bar-item w3-button">Musings</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="about.html" class="w3-bar-item w3-button w3-padding-large">ABOUT</a>
+  <a href="projects.html" class="w3-bar-item w3-button w3-padding-large">PROJECTS</a>
+  <a href="contact.html" class="w3-bar-item w3-button w3-padding-large">CONTACT</a>
+  <a href="cv_updated.pdf" class="w3-bar-item w3-button w3-padding-large">RESUME</a>
+</div>
+
+<style>
+#myAnimation {
+  width: 22%;
+  height: 27%;
+  position: absolute;
+  top: 12px;
+  background-image: url('crane3.jpg');
+  background-size: 100%;
+  opacity: .4;
+}
+#myAnimation2 {
+  width: 22%;
+  height: 27%;
+  position: absolute;
+  left:1280px;
+  bottom: 110px;
+  background-image: url('crane4.jpg');
+  background-size: 100%;
+  opacity: .4;
+}
+body {
+    background-image: url('background_cranes2.jpg');
+    background-color: linen;
+    background-size : 100% auto
+}
+
+h1 {
+    color: maroon;
+    margin-left: 40px;
+} 
+</style>
+<div id ="myAnimation2"></div>
+</body>
+<!-- Footer -->
+
+<footer class="w3-bottom w3-black w3-padding-10">
+   <style>
+    #foot{
+    font-size: 16px;
+    line-height: 5px;
+    float: right;
+}
+    </style>
+  <div class="w3-xxxlarge w3-section">
+    <a href="contact.html"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.pinterest.com/ichildren/"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
+    <a href=https://github.com/skgironwolf><i class="fa fa-github w3-hover-opacity"></i></a>
+    <a href="https://www.linkedin.com/in/saadia-gabriel-97708a103"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <div id= "foot" align=right>
+    
+<p><br /></p>
+<p>Laps completed by top crane :</p>
+<a id = "score">
+    
+    <script type="text/javascript">
+        innerHTML = 0;
+        document.write(innerHTML);
+      </script>
+      </a>
+    <p>Laps completed by bottom crane:</p>
+    <a id = "score2">
+    <script type="text/javascript">
+        innerHTML = 0;
+        document.write(innerHTML);
+      </script></a>
+      </div>
+   
+  </div>
+  All content is &copy; 2017&#8208;2019 Saadia Gabriel, all rights reserved.
+</footer>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<title>Saadia Gabriel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card-2">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT</a>
+    <a href="projects.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PROJECTS</a>
+    <a href="cv_updated.pdf" class="w3-bar-item w3-button w3-padding-large w3-hide-small">RESUME</a>
+    <a href="contact.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="writing.html" class="w3-bar-item w3-button">Writing</a>
+        <a href="ilinks.html" class="w3-bar-item w3-button">Interesting Links</a>
+        <a href="musings.html" class="w3-bar-item w3-button">Musings</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="about.html" class="w3-bar-item w3-button w3-padding-large">ABOUT</a>
+  <a href="projects.html" class="w3-bar-item w3-button w3-padding-large">PROJECTS</a>
+  <a href="contact.html" class="w3-bar-item w3-button w3-padding-large">CONTACT</a>
+  <a href="cv_updated.pdf" class="w3-bar-item w3-button w3-padding-large">RESUME</a>
+</div>
+
+<style>
+#myAnimation {
+  width: 22%;
+  height: 27%;
+  position: absolute;
+  top: 12px;
+  background-image: url('crane3.jpg');
+  background-size: 100%;
+  opacity: .4;
+}
+#myAnimation2 {
+  width: 22%;
+  height: 27%;
+  position: absolute;
+  left:1280px;
+  bottom: 110px;
+  background-image: url('crane4.jpg');
+  background-size: 100%;
+  opacity: .4;
+}
+body {
+    background-image: url('background_cranes2.jpg');
+    background-color: linen;
+    background-size : 100%;
+}
+
+h1 {
+    color: maroon;
+    margin-left: 40px;
+} 
+</style>
+
+<div class="w3-content w3-display-container">
+
+<div class="w3-display-container mySlides">
+  <img src="me.jpg" style="width:100%" style="height:100%" >
+  <div class="w3-display-bottomleft w3-xxlarge w3-container w3-black" style="position: fixed; bottom: 0; left: 0; height:50px; width: 100%;">
+    <a href="contact.html"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.pinterest.com/ichildren/"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
+    <a href=https://github.com/skgironwolf><i class="fa fa-github w3-hover-opacity"></i></a>
+    <a href="https://www.linkedin.com/in/saadia-gabriel-97708a103"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <font size="1">All content is &copy; 2017&#8208;2019 Saadia Gabriel, all rights reserved.</font>
+  </div>
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="background.jpg" style="width:100%">
+  <div class="w3-display-bottomleft w3-xxlarge w3-container w3-black" style="position: fixed; bottom: 0; left: 0; height:50px; width: 100%;">
+    <a href="contact.html"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.pinterest.com/ichildren/"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
+    <a href=https://github.com/skgironwolf><i class="fa fa-github w3-hover-opacity"></i></a>
+    <a href="https://www.linkedin.com/in/saadia-gabriel-97708a103"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <font size="1">All content is &copy; 2017&#8208;2019 Saadia Gabriel, all rights reserved.</font>
+  </div>
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="news.jpg" style="width:100%">
+  <div class="w3-display-bottomright w3-large w3-container w3-padding-16 w3-black">
+    Beautiful Mountains
+  </div>
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="background_cranes2.jpg" style="width:100%">
+  <div class="w3-display-topright w3-large w3-container w3-padding-16 w3-black">
+    The Rain Forest
+  </div>
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="background_cranes2.jpg" style="width:100%">
+  <div class="w3-display-middle w3-large w3-container w3-padding-16 w3-black">
+    Mountains!
+  </div>
+</div>
+
+<button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+<button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+
+</div>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
+
+</body>
+<!-- Footer -->
+
+</html>
