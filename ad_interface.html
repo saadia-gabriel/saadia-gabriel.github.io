@@ -1,0 +1,639 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="Other" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:12pt;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel-heading"><strong>Instructions</strong></div>
+
+<div class="panel-body">
+<p>Read a headline from an ad and label (1) what you think the motivations of the ad are, and (2) what reactions someone might have to the ad.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- End Instructions --><!-- Content Body --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<section class="container" id="Other" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:12pt;">
+<fieldset>
+<div class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title" style="font-weight: bold">Full Instructions &nbsp; &nbsp; <a data-toggle="collapse" href="#collapse0" style="color:#0080ff;font-weight:normal;text-decoration: underline;">(Expand/Collapse)</a></h4>
+</div>
+
+<div class="panel-collapse collapse in" id="collapse0" style="margin:10px">
+<p>Thanks for participating in this HIT! You will read a sentence fragment depicting a headline from an ad. </p>
+
+<p>Think about what might be implied by the ad described, including the reaction it might affect your prior beliefs, what the purpose seems to be, what kind of tactics are being used to encourage clicking, whether it seems deceptive to you, whether you would click on it if you saw it on a website, and whether it is a political ad.</p>
+
+<p>We ask the following questions:</p> 
+<p>1. Does the ad affect prior beliefs? (for this, consider if you have prior beliefs about the content of the ad and whether seeing the ad either reinforces them or changes your mind)<br><br>
+	2. What is the intent/purpose of the ad? (many ads may be purposefully unclear or deceptive, try to determine the likely intent as well as you can. If you are absolutely unsure, you may skip this question.)<br><br>
+	3. What tactics are used by the ad? (select any tactic that applies, it is possible that more than one is used)<br><br>
+	4. Is the ad deceptive to you? (give your personal impression of the ad and whether you feel it is trying to manipulate you or benign)<br><br>
+	5. Would you click on the ad? (does the ad appeal to you or make you curious enough to click?)<br><br>
+    6. Does the ad contain political content or convey a political message (is it a political ad? if so, does it seem to be politically left- or right-leaning?)<br><br>
+	Please answer as well as you can. 
+
+
+
+</p>
+
+&nbsp;
+
+</div>
+</div>
+</div>
+
+<h2>Task</h2>
+
+<div class="story-excerpt">
+
+<h4>Ad image</h4>
+<div style="padding-left:20px;">
+<img src="https://s3.amazonaws.com/my-image-repo/mturk-images/${image_url}" alt="pic not found" onerror=this.src="cat_image.jpeg">
+</div>
+<h4>Ad headline</h4>
+
+<div style="padding-left:20px;">
+<p style="font-size:12pt">${sentence}</p>
+</div>
+</div>
+
+<div class="wrapper">
+<div class="page" id="1">
+<div class="cell">
+<div id="allqs">
+
+
+<h4 class="panel-title" style="font-weight: bold;font-size:14pt">Questions &nbsp; &nbsp; <a data-toggle="collapse" href="#type_news" style="color:#0080ff;font-weight:normal;text-decoration: underline;">(Expand/Collapse)</a></h4>
+<div id="type_news" style="margin-left:20px; background-color:#FFFFFF; border:1px solid grey"  class="panel-collapse collapse in" ></br><p style="font-size:12pt;"> &nbsp; &nbsp; <strong>1. </strong>Does this ad affect your prior beliefs about the topic?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="radio9b" name="real" type="radio" value="realnews" />&nbsp;Yes (&#10004)<br>
+<input id="radio9a" name="real" type="radio" value="mis" />&nbsp;No (&#10007)<br /></div>
+&nbsp;
+<div class="form-group row" style="display: inline-block;margin-left:50px">
+<label for="stateFrame" class="col-sm-12 col-form-label">
+If you selected "yes," please provide a single sentence explaining how your beliefs were affected (e.g. "I am less skeptical of vegetarian dog food" or "I think the candidate might be shady."<br>
+</label>
+<div class="col-sm-6">
+<input type="text" name="stateBelief" placeholder="e.g. I think the candidate might be shady" class="form-control" id="stateBelief" style="font-size: .85rem;">
+</div>
+ </div>     
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 2. </strong>Do you understand the ad enough to guess the intent/purpose?</p>
+
+<div style="margin-left:50px;margin-top:10px"><input id="radio10a" name="10react" onclick="show('10sbq1', 'input10a1');" type="radio" value="yes" />&nbsp;Yes (&#10004)<br />
+<input id="radio10b" name="10react" onclick="unshow('10sbq1', 'input10a1');" type="radio" value="no" />&nbsp;No (&#10007)</div>
+&nbsp;
+
+<div id="10sbq1" style="display:none;margin-left:20px">
+<p id="10a" style="font-size:12pt;margin-left:10px"><strong>a). </strong>What is the intent or purpose?</p>
+
+<p style="font-size:10pt;color:grey;margin-left:20px">(Try to describe without reusing words from the headline, be as specific as you can be)</p>
+
+<div style="margin-left:50px"><!--They feel ... -->
+<table>
+	<tbody>
+		<tr>
+			<td>
+			<div><input autocomplete="off" id="input10a1" name="10mo2a" onblur="replacetext()" onfocus="wipeclean()" style="padding-left:10px;margin-left:10px;color:grey;width:250px" type="text" value="The intent is" width="200px" /><span style="font-size:8pt"> [describe the intent, e.g. "to sell cat food"] </span></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div id="10ab" style=""><input autocomplete="off" id="input10a2" name="10mo2b" style="padding-left:10px;margin-left:10px;color:grey;width:250px" type="text" value="The intent is" width="200px" /> <span style="font-size:8pt"> [write another intent - optional (e.g. "to slander politican X")] </span></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div id="10ac" style=""><input autocomplete="off" id="input10a3" name="10mo2c" style="padding-left:10px;margin-left:10px;color:grey;width:250px" type="text" value="The intent is" width="200px" /> <span style="font-size:8pt"> [write another intent - optional] </span></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+</div>
+<br />
+
+<!-- </div>  end sq1 -->
+<!-- end intents3 --></div>
+    <p style="font-size:12pt;"><strong> &nbsp; &nbsp; 3. </strong>Which clickbait tactics are used by the headline (click any that apply)?</p>   
+    <div style="margin-left:50px;margin-top:10px">
+    <input type="checkbox" id="intent1" name="intent1" value="vague">
+    <label for="intent1"> provokes curiosity </label><br>
+    <p style="font-size:8pt;"> (e.g. the top secret cure to all your health woes) </p><br>
+    <input type="checkbox" id="intent2" name="intent2" value="teaser">
+    <label for="intent2"> explicitly hides information</label><br>
+     <p style="font-size:8pt;"> (e.g. click to find out x, you won't believe what we're about to tell you) </p><br>   
+    <input type="checkbox" id="intent3" name="intent3" value="language">
+    <label for="intent3"> exaggeration/loaded language</label><br>
+    <p style="font-size:8pt;"> (e.g. this is the greatest laptop you'll ever own) </p><br>  
+    <input type="checkbox" id="intent4" name="intent4" value="fear">
+    <label for="intent4"> appeal to fear</label><br>
+    <p style="font-size:8pt;"> (e.g. what are they trying to hide from you?) </p><br>  
+    <!--<label for="intent4"> appeal to fear</label><br>
+    <input type="checkbox" id="intent4" name="vehicle3" value="Boat">
+    <label for="vehicle3"> promising an outcome or to inform</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> tips</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> humor</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> posing a question</label><br>
+     <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> celebrity endorsement</label><br>
+     <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> appeal to common social behaviors</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> identity-based</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> financial bait and switch</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> purposefully inflamatory</label><br>-->
+    </div>
+<p style="font-size:12pt;"> &nbsp; &nbsp; <strong>4. </strong>Do you find the ad deceptive, scammy or misleading?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="radio11a" name="scam"  type="radio" value="yes" />&nbsp;Yes (&#10004)<br>
+<input id="radio11b" name="scam"  type="radio" value="maybe" />&nbsp;Maybe (<b>?</b>)<br />
+<input id="radio11c" name="scam"  type="radio" value="no" />&nbsp;No (&#10007)<br />
+</div><br>
+
+<p style="font-size:12pt;"> &nbsp; &nbsp; <strong>5. </strong>Would you click on the ad?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="radio12a" name="click"  type="radio" value="yes" />&nbsp;Yes (&#10004)<br>
+<input id="radio12b" name="click"  type="radio" value="maybe" />&nbsp;Maybe (<b>?</b>)<br />
+<input id="radio12c" name="click"  type="radio" value="no" />&nbsp;No (&#10007)<br />
+</div><br>
+
+<p style="font-size:12pt;"> &nbsp; &nbsp; <strong>6. </strong>Does the ad contain political content or a political message?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="radio13a" name="political" type="radio" value="yes" onclick="show('6a');"/>&nbsp;Yes (&#10004)<br>
+<input id="radio13b" name="political" type="radio" value="no" onclick="unshow('6a');"/>&nbsp;No (&#10007)<br />
+</div>
+<div id="6a" style="display:none;min-width: 500px;margin-left:50px">
+<p id="6a_text" style="font-size:12pt"><strong>a). </strong>What is the political leaning?</p> 
+    <ul class='likert'>
+        <li>
+            <input id="likertI_a" input type="radio" name="likertI" value="very_left">
+            <label for="likertI_a">Very Left-Leaning</label>
+        </li>
+        <li>
+            <input id="likertI_b" input type="radio" name="likertI" value="left">
+        </li>
+        <li>
+            <input id="likertI_c" input type="radio" name="likertI" value="center">
+        </li>
+        <li>
+            <input id="likertI_d" input type="radio" name="likertI" value="right">
+        </li>
+        <li>
+            <input id="likertI_e" input type="radio" name="likertI" value="very_right">
+            <label for="likertI_e">Very Right-Leaning</label>
+        </li>
+    </ul>
+</div>
+
+<!--end before qs--><!-- </div> end before div  --><br />
+<br />
+&nbsp;
+
+<h4 class="panel-title" style="font-weight: bold;font-size:14pt">Optional Demographic Survey Questions. Note: If you have previously filled out these questions, you can skip this section. &nbsp; &nbsp; <a data-toggle="collapse" href="#demo" style="color:#0080ff;font-weight:normal;text-decoration: underline;">(Expand/Collapse)</a></h4>
+<div id="demo" style="margin-left:20px; background-color:#FFFFFF; border:1px solid grey"  class="panel-collapse collapse in" >
+</br>
+<p style="font-size:12pt;"><strong>&nbsp; &nbsp; 11. </strong> How old are you? &nbsp; &nbsp; </p>
+&nbsp; &nbsp;<select id="age-select" name="age">
+  <option value="0">&nbsp; &nbsp; Prefer Not to Say</option>
+  <option value="1">&nbsp; &nbsp; 18-24</option>
+  <option value="2">&nbsp; &nbsp; 25-34</option>
+  <option value="3">&nbsp; &nbsp; 35-44</option>
+  <option value="4">&nbsp; &nbsp; 45-54</option>
+  <option value="5">&nbsp; &nbsp; 55-64</option>
+  <option value="6">&nbsp; &nbsp; 65 or older</option>
+</select></br>
+</br>
+<p style="font-size:12pt;"><strong>&nbsp; &nbsp; 12. </strong> What is your education level? &nbsp; &nbsp; </p>
+&nbsp; &nbsp;<select id="ed-select" name="ed">
+  <option value="0">&nbsp; &nbsp; Prefer Not to Say</option>
+  <option value="1">&nbsp; &nbsp; None Completed</option>
+  <option value="2">&nbsp; &nbsp; High school graduate</option>
+  <option value="3">&nbsp; &nbsp; Some college credit (no degree)</option>
+  <option value="4">&nbsp; &nbsp; Associate Degree</option>
+  <option value="5">&nbsp; &nbsp; Bachelor's Degree</option>
+  <option value="6">&nbsp; &nbsp; Master's Degree</option>
+  <option value="7">&nbsp; &nbsp; Professional Degree</option>
+  <option value="8">&nbsp; &nbsp; Doctorate Degree</option>
+</select>
+</br>
+</br>
+<p style="font-size:12pt;"><strong>&nbsp; &nbsp; 13. </strong> What is your ethnicity (please select all that apply)? &nbsp; &nbsp; </p>
+<label for="">&nbsp; &nbsp; White </label>
+<input type="checkbox" id="eth1" name="eth1" value="White"></br>
+<label for="">&nbsp; &nbsp; Hispanic/Latino </label>
+<input type="checkbox" id="eth2" name="eth2" value="Hispanic/Latino"></br>
+<label for="">&nbsp; &nbsp; Black/African-American </label>
+<input type="checkbox" id="eth3" name="eth3" value="Black/African-American"></br>
+<label for="">&nbsp; &nbsp; Native American </label>
+<input type="checkbox" id="eth4" name="eth4" value="Native American"></br>
+<label for="">&nbsp; &nbsp; Asian/Pacific Islander </label>
+<input type="checkbox" id="eth5" name="eth5" value="Asian/Pacific Islander"></br>
+<label for="">&nbsp; &nbsp; Other </label>
+<input type="checkbox" id="eth6" name="eth6" value="Other">
+</br>
+</br>
+<p style="font-size:12pt;"><strong>&nbsp; &nbsp; 14. </strong> What is your gender? &nbsp; &nbsp; </p>
+&nbsp; &nbsp;<select id="gender-select" name="gender">
+  <option value="0">&nbsp; &nbsp; Prefer Not to Say </option>
+  <option value="1">&nbsp; &nbsp; Woman/Female </option>
+  <option value="2">&nbsp; &nbsp; Man/Male</option>
+  <option value="3">&nbsp; &nbsp; Non-Binary/Non-Conforming</option>
+  <option value="4">&nbsp; &nbsp; Other</option>
+</select>
+</br>
+</br>
+<p style="font-size:12pt;"><strong>&nbsp; &nbsp; 15. </strong> Which sources do you use most often to read news online (please select all that apply)? &nbsp; &nbsp; </p>
+<label for="">&nbsp; &nbsp; Twitter </label>
+<input type="checkbox" id="news1" name="news1" value="Twitter"></br>
+<label for="">&nbsp; &nbsp; Facebook </label>
+<input type="checkbox" id="news17" name="news17" value="Facebook"></br>
+<label for="">&nbsp; &nbsp; CNN </label>
+<input type="checkbox" id="news3" name="news3" value="CNN"></br>
+<label for="">&nbsp; &nbsp; New York Times </label>
+<input type="checkbox" id="news8" name="news8" value="New York Times"></br>
+<label for="">&nbsp; &nbsp; Fox News Digital Network </label>
+<input type="checkbox" id="news9" name="news9" value="Fox News Digital Network"></br>
+<label for="">&nbsp; &nbsp; Yahoo-ABC News Network </label>
+<input type="checkbox" id="news2" name="news2" value="Yahoo-ABC News Network"></br>
+<label for="">&nbsp; &nbsp; Huffington Post </label>
+<input type="checkbox" id="news4" name="news4" value="Huffington Post"></br>
+<label for="">&nbsp; &nbsp; CBS News </label>
+<input type="checkbox" id="news5" name="news5" value="CBS News"></br>
+<label for="">&nbsp; &nbsp; USAToday </label>
+<input type="checkbox" id="news6" name="news6" value="USAToday"></br>
+<label for="">&nbsp; &nbsp; BuzzFeed </label>
+<input type="checkbox" id="news7" name="news7" value="BuzzFeed"></br>
+<label for="">&nbsp; &nbsp; Daily Mail </label>
+<input type="checkbox" id="news10" name="news10" value="Daily Mail"></br>
+<label for="">&nbsp; &nbsp; Washington Post </label>
+<input type="checkbox" id="news11" name="news11" value="Washington Post"></br>
+<label for="">&nbsp; &nbsp; Reuters </label>
+<input type="checkbox" id="news12" name="news12" value="Reuters"></br>
+<label for="">&nbsp; &nbsp; Breitbart News Network </label>
+<input type="checkbox" id="news13" name="news13" value="Breitbart News Network"></br>
+<label for="">&nbsp; &nbsp; NPR </label>
+<input type="checkbox" id="news14" name="news14" value="NPR"></br>
+<label for="">&nbsp; &nbsp; BBC </label>
+<input type="checkbox" id="news15" name="news15" value="BBC"></br>
+<label for="">&nbsp; &nbsp; Vox </label>
+<input type="checkbox" id="news20" name="news20" value="Vox"></br>
+<label for="">&nbsp; &nbsp; The Guardian </label>
+<input type="checkbox" id="news16" name="news16" value="GUARDIAN"></br>
+<label for="">&nbsp; &nbsp; Reddit </label>
+<input type="checkbox" id="news18" name="news18" value="Reddit"></br>
+<label for="">&nbsp; &nbsp; 4chan </label>
+<input type="checkbox" id="news19" name="news19" value="4chan"></br>
+<label for="">&nbsp; &nbsp; YouTube </label>
+<input type="checkbox" id="news21" name="news21" value="youtube"></br>
+<label for="">&nbsp; &nbsp; Other </label>
+<input type="checkbox" id="news17" name="news17" value="Other"></br>
+</br>
+<p style="font-size:12pt;"><strong>&nbsp; &nbsp; </strong> If you selected "Other" as a commonly used news source, please enter the name of the news source below: &nbsp; &nbsp; </p>
+&nbsp; &nbsp;<textarea cols="50" name="otherbox" rows="1" style="margin-left:10px;margin-top:10px"></textarea><br />
+</div>
+</br>
+</br>
+<p style="font-size:12pt;width:350pt"> &nbsp; &nbsp; Optional Feedback: Thanks for filling out the questions above! If something about the hit was unclear, please leave a comment in the box below. We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.</p>
+<textarea cols="50" name="commentbox" rows="2" style="margin-left:10px;margin-top:10px"></textarea><br />
+<br />
+&nbsp;
+<center onclick="getNext();"><span id="warning" style="display:none;color:red">Type in at least one emotion word before continuing... </span> <input class="btn btn-primary" id="submitButton" onclick="getNext()" type="submit" value="Submit" /></center>
+</div>
+<!-- end cell --></div>
+<!-- end page --></div>
+<!-- end wrapper --></fieldset>
+</section>
+<!-- End Content Body --><!-- close container --><script type="text/javascript">
+window.onload = function() {
+  showexamples()
+}
+
+var current = 1;
+var moved = []; //pages which have been moved by the randomization
+var movedto = [];
+var emotions = [];
+var firstclick = true;
+ //takes randomization into account
+ function effectivePage(pagenum) {
+     var index = moved.indexOf(pagenum);
+     if (index == -1) {
+         return pagenum;
+     } else {
+         return movedto[index];
+     }
+ }
+
+ var numberText = []; //stores divs which need to be updated when the page changes
+ var pntexts = []; //texts in them
+
+  function wipeclean(){
+    var el = document.getElementById('input2a1')
+    if (el.value == "to (be)") {
+      el.value = "";
+      el.style.color = "black";
+    }
+  }
+
+  function unrequireall(keep_ids) {
+    var els = [//'radio1aa', 'radio1ab', //q1
+               'radio2a', 'radio2b', //q2
+                'input2a1', // q2a
+                'db1r1', 'db1r2', 'db1r3', 'db1r4', 'db1r5', // likert 2b
+                'input3a1', // q4
+                'radio4a', 'radio4b', // q5
+                'input4a1', // q5a
+                'db5r1', 'db5r2', 'db5r3', 'db5r4', 'db5r5']; // likert 5
+    for(var i = 0; i < els.length; i++) {
+      if (list_contains(els[i], keep_ids) == -1) {
+        notrequired(els[i]);
+      }
+    }
+    unshowhelper('allqs');
+          
+  }
+
+  function list_contains(val, list) {
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] == val) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function requireall() {
+    var els = [//'radio1aa', 'radio1ab', //q1
+               'radio2a', 'radio2b', //q2
+                'input2a1', // q2a
+                'db1r1', 'db1r2', 'db1r3', 'db1r4', 'db1r5', // likert 2b
+                'input3a1', // q4
+                'radio4a', 'radio4b', // q5
+                'input4a1', // q5a
+                'db5r1', 'db5r2', 'db5r3', 'db5r4', 'db5r5']; // likert 5
+    for(var i = 0; i < els.length; i++) {
+      required(els[i]);
+    }
+    showhelper('allqs');
+  }
+
+  function unshowhelper(numid){
+    var elem = document.getElementById(numid);
+    elem.style.display = "none";
+  }
+
+  function showhelper(numid){
+    var elem = document.getElementById(numid);
+    elem.style.display = "table";
+  }
+
+  function notrequired(numid){
+    var elem = document.getElementById(numid);
+    elem.required = false;
+  }
+
+  function required(numid) {
+    var elem = document.getElementById(numid);
+    elem.required = true;
+  }
+
+
+function show(numid1, numid2){
+  showhelper(numid1);
+  required(numid2);
+}
+
+function unshow(numid1, numid2){
+  unshowhelper(numid1);
+  notrequired(numid2);
+}
+
+
+function replacetext(){
+  var el = document.getElementById('input2a1')
+  if (el.value == "") {
+    el.value = "to (be)";
+    el.style.color = "grey";
+  }
+  // document.getElementById("input1a1").value = "to (be)";
+  // document.getElementById("input1a1").style.color = "grey";
+}
+
+function showexamples(){
+  var el = document.getElementById('exflag');
+  var n = el.innerHTML;
+  var exlist = ['ex1', 'ex2', 'ex3', 'ex4', 'ex5'];
+  if (n > 0) {
+    document.getElementById('examples').style.display = 'table';
+  }
+  for (var i = 0; i < n; i++) {
+    document.getElementById(exlist[i]).style.display = 'table';
+  }
+
+}
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+</script>
+<style type="text/css">        th {
+      font-weight: normal;
+    }
+
+    fieldset { padding: 10px; background:#fbfbfb; border-radius:5px; margin-bottom:5px; }
+    .columns{
+        list-style-type: none;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        columns: 2;
+        list-style-position: inside;
+    }
+    .unbulleted{
+        list-style-type: none;
+        padding:7px;
+        margin:0px;
+    }
+
+    #author1{
+           border-radius:15px;
+    }
+    #author2{
+           border-radius:15px;
+    }
+    #author3{
+           border-radius:15px;
+    }
+    #author4{
+           border-radius:15px;
+    }
+    #author5{
+           border-radius:15px;
+    }
+    #author6{
+           border-radius:15px;
+    }
+    #author7{
+           border-radius:15px;
+    }
+    #type_news{
+           border-radius:15px;
+       }
+    #demo{
+           border-radius:15px;
+    }
+
+    .story-excerpt {
+       margin:40 auto;
+       min-width: 500px;
+       border:2px #333333;
+       background-color: #f2f2f2;
+       border-style: solid;
+       padding-right:10px;
+       padding-left:10px;
+       display:table;
+       border-radius:15px;
+    }
+    table{
+       font-size:10pt;
+    }
+
+
+    /* Tooltip container */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+
+    /* Tooltip text */
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    .foo {
+      width:120px;
+      color:black;
+    }
+
+    form .likert {
+      list-style:none;
+      width:100%;
+      margin:0;
+      padding:0 0 35px;
+      display:block;
+      border-bottom:2px solid #efefef;
+    }
+    form .likert:last-of-type {border-bottom:0;}
+    form .likert:before {
+      content: '';
+      position:relative;
+      top:11px;
+      left:9.5%;
+      display:block;
+      background-color:#efefef;
+      height:4px;
+      width:78%;
+    }
+    form .likert li {
+      display:inline-block;
+      width:19%;
+      text-align:center;
+      vertical-align: top;
+    }
+    form .likert li input[type=radio] {
+      display:block;
+      position:relative;
+      top:0;
+      left:50%;
+      margin-left:-6px;
+
+    }
+    form .likert li label {width:100%;}
+
+    .radio3 + label::after{
+        width: 1.5em;
+        height: 1.5em;
+        position:relative;
+        top:0;
+        margin-left:-6px;
+        background-color: #fff;
+        content: '';
+        display: inline-block;
+        border:5px solid #fff;
+        box-shadow: 0 0 1pt 2pt black;
+        border-radius: 50%;
+        margin: 0 0.5em;
+    }
+
+    .radio4 + label::before {
+        width: 1.5em;
+        height: 1.5em;
+        position:relative;
+        top:0;
+        margin-left:-6px;
+        background-color: #fff;
+        content: '';
+        display: inline-block;
+        border:5px solid #fff;
+        box-shadow: 0 0 1pt 2pt black;
+        border-radius: 50%;
+        margin: 0 0.5em;
+    }
+    .example-table td, .example-table th{
+       border:1px solid grey;
+       text-align:center;
+       font-size: 10pt;
+    }
+
+    }
+</style>
+
+</crowd-form>
