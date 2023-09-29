@@ -1,0 +1,1499 @@
+ <!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+<crowd-form answer-format="flatten-objects">
+<!-- Bootstrap v3.0.3 -->
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="Other" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:12pt;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel panel-default">
+  <div class="panel-heading"><strong>Disclaimer and Consent:</strong></div>
+
+<p>This task is part of a study being conducted in order to design safer, more personalized social media platforms.</p>
+<p>You will be shown random unverified news claims in a simulated social media feed. You may interact with these news claims by liking them, sharing them, or flagging them if you believe the content is harmful in some way.</p>
+
+<p>As part of the study you will be asked to answer questions about personal preferences and your view of society. Some examples of questions are:</p>
+
+<ul>
+<li>Do you think it is a good or bad thing for the country if a woman is elected president? 
+
+
+<li>If a new Covid-19 booster was released in the next few days, how likely is it that you would get vaccinated? 
+
+
+<li>How important is the military to you? 
+</ul>
+
+<p>There are no right or wrong answers to these questions. We ask is that you be as authentic to yourself as possible. <b>These questions will not ask you to disclose identifying personal information</b>. However, if you are not willing to answer such questions, please do not accept the HIT. </p>
+ <br><br>
+ I consent to participate in this study: 
+<input type="checkbox" id="consent" name="consent" onclick="consented()" value="Yes">
+</div>
+
+</div>
+</div>
+</section>
+<!-- End Instructions --><!-- Content Body --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<section class="container" id="Other" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:12pt;">
+<fieldset>
+<div class="panel-group" id="task" style="display: none;">
+<div class="panel panel-default">
+<div class="panel-heading">
+<div class="panel-heading" style="font-weight: bold">Full Instructions &nbsp; &nbsp; <a data-toggle="collapse" href="#collapse0" style="color:#0080ff;font-weight:normal;text-decoration: underline;">(Expand/Collapse)</a></div>
+</div>
+
+<div class="panel-collapse collapse in" id="collapse0" style="margin:10px">
+<p>Thanks for participating in this HIT! We'll start by asking you a few questions.</p>
+
+<div class="story-excerpt" id="q1">
+
+<div style="padding-left:20px;">
+<p style="font-size:12pt">Question: Thinking about the Democratic and Republican parties, would you say there is</p>
+</div>
+        <ul class="likert">
+            <li class="likert"><input id="q1.start" type="radio" name="q1" value="1" onclick="skip1()" />A great deal of difference in what they stand for
+            <li class="likert"><input id="q1.2" type="radio" name="q1" value="2" onclick="skip1()"/>A fair amount of difference in what they stand for
+            <li class="likert"><input id="q1.end" type="radio" name="q1" value="3" onclick="skip1()"/>Hardly any difference at all in what they stand for
+        </ul>
+    <button type="button" id="skip.1" onclick="skip1()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:14pt; float:right;"><strong>Skip</strong></button>
+</div>
+
+<div class="story-excerpt" id="q2" style="display:none;">
+
+<div style="padding-left:20px;">
+<p style="font-size:12pt">Question: Overall, do you think science has made life easier or more difficult for most people?</p>
+</div>
+        <ul class="likert">
+            <li class="likert"><input id="q2.start" type="radio" name="q2" value="1" onclick="skip2()" />Easier
+            <li class="likert"><input id="q2.end" type="radio" name="q2" value="2" onclick="skip2()"/>More Difficult 
+        </ul>
+    <button type="button" id="skip.2" onclick="skip2()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:14pt; float:right;"><strong>Skip</strong></button>
+</div>
+<p>Next you will be shown a news feed with headlines. You can either ignore or interact with each headline. The possible interactions are (1) liking the headline, (2) sharing the headline, or (3) flagging the headline for false/harmful content.</p> 
+<p>You can also click on the "Find out more" button. This will tell you what an AI model predicts about the content of the associated article (e.g. the reliability of the article based on the headline).</p>
+<p>Once you're done interacting with the feed, you can scroll down and press the "Log Out" button.</p>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading" style="display:none;">
+<div class="panel-heading" style="font-weight: bold">User Survey &nbsp; &nbsp; <a data-toggle="collapse" href="#collapse1" style="color:#0080ff;font-weight:normal;text-decoration: underline;">(Expand/Collapse)</a></div>
+</div>
+
+<div class="panel-collapse collapse in" id="collapse1" style="display:none;margin:10px">
+<p>Please let us know a bit about yourself so we can make the feed better! (If you have already filled this out, feel free to skip.)</p>
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 1. </strong>What is your age range?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="age1" name="age" type="radio" value="18-24" />&nbsp;18-24<br />
+<input id="age2" name="age" type="radio" value="25-34" />&nbsp;25-34<br />
+<input id="age3" name="age" type="radio" value="35-44" />&nbsp;35-44<br />
+<input id="age4" name="age" type="radio" value="45-54" />&nbsp;45-54<br />
+<input id="age5" name="age" type="radio" value="55-64" />&nbsp;55-64<br />
+<input id="age6" name="age" type="radio" value="65+" />&nbsp;65+</div>
+&nbsp;
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 2. </strong>What is your gender identity?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="gender1" name="gender" type="radio" value="female" />&nbsp;Female<br />
+<input id="gender2" name="gender" type="radio" value="male" />&nbsp;Male<br />
+<input id="gender3" name="gender" type="radio" value="nonbinary" />&nbsp;Non-Binary<br/>
+<input id="gender4" name="gender" type="radio" value="other" />&nbsp;Other</div>
+&nbsp;
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 3. </strong>What do you identify as being your ethnicity/race? Select all that apply.</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="race1" name="race" type="checkbox" value="black" />&nbsp;African-American/Black<br />
+<input id="race2" name="race" type="checkbox" value="asian" />&nbsp;Asian<br />
+<input id="race3" name="race" type="checkbox" value="latino" />&nbsp;LatinX/Hispanic<br/>
+<input id="race4" name="race" type="checkbox" value="native-american" />&nbsp;Native Alaskan/Native American<br />
+<input id="race5" name="race" type="checkbox" value="pacific-islander" />&nbsp;Native Hawaiian/Pacific Islander<br/>
+<input id="race6" name="race" type="checkbox" value="white" />&nbsp;White</div>
+&nbsp;
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 4. </strong>Do you have a religious affliation?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="religion1" name="religion" type="radio" value="christian" />&nbsp;Christian<br />
+<input id="religion2" name="religion" type="radio" value="hindu" />&nbsp;Hindu<br />
+<input id="religion3" name="religion" type="radio" value="jewish" />&nbsp;Jewish<br />
+<input id="religion4" name="religion" type="radio" value="muslim" />&nbsp;Muslim<br/>
+<input id="religion5" name="religion" type="radio" value="other" />&nbsp;Other<br/>
+<input id="religion6" name="religion" type="radio" value="spiritual" />&nbsp;Spiritual<br/>
+<input id="religion7" name="religion" type="radio" value="atheist" />&nbsp;None (Atheist)</div>
+&nbsp;
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 5. </strong>What would you say your political leaning is (based on a US-centric left-right spectrum)?</p>
+
+<div style="margin-left:50px;margin-top:10px">
+<input id="politics1" name="politics" type="radio" value="very_left" />&nbsp;Very Left<br />
+<input id="politics2" name="politics" type="radio" value="left" />&nbsp;Left<br />
+<input id="politics3" name="politics" type="radio" value="center" />&nbsp;Center<br />
+<input id="politics4" name="politics" type="radio" value="right" />&nbsp;Right<br/>
+<input id="politics5" name="politics" type="radio" value="very_right" />&nbsp;Very Right</div>
+&nbsp;
+
+<p style="font-size:12pt;"><strong> &nbsp; &nbsp; 6. </strong>Where do you most frequently go for news (e.g. New York Times, Breitbart, Twitter, etc)? If giving more than one answer, separate with commas.</p>
+<div style="margin-left:50px;margin-top:10px">
+  <textarea cols="50" name="news_source" rows="2" style="margin-left:10px;margin-top:10px"></textarea><br />
+</div>
+&nbsp;
+
+<!-- The subject of the event,"X", is a person. The placeholder "PERSON's" may be "X" themselves. Please rate the quality of the belief description based on the following questions:</p>
+<p>
+
+<ol padding: 20px 0px;>
+  <li>Does the belief description impact whether or not you think the headline is trustworthy?</li>
+  <li>What is the overall quality of the belief description in terms of coherence and relevance?</li>
+  <li>Does the belief convey feelings or thoughts that are (generally) considered socially acceptable?</li>
+  <li>Do you think it is possible that the belief and/or news event perpetuate negative social biases or stereotypes?</li>
+</ol>
+
+</p> --> 
+
+</div>
+
+  
+  
+
+<h2>News Feed</h2>
+
+
+<!--article 1 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.1" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: True with 99% confidence. </p><br/>
+    <p>The headline is reportedly true because the U.S. Treasury cited existing laws and regulations in its response to Republicans who requested financial records related to President Joe Biden's son, Hunter Biden.<br/><br/> The department mentioned that they could only provide such information if the request came from a committee chaired by Democrats, as they controlled the House of Representatives at the time.<br/><br/> The law essentially granted the authority to the majority party, allowing them to request such sensitive information.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from FOXNEWS.COM</p>
+<p style="font-size:12pt">US Treasury says request for Hunter Biden records must come from Dem-led committee, not Republicans</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/True/non-medical/us-treasury-says-request-for-hunter-biden-records-must-come-from-dem-led-committee-not-republicans2022-09-03-22-05-15.jpg" alt="news_image1">
+</div>
+<button type="button" id="like.1" onclick="liked1()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.1" onclick="shared1()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.1" onclick="flagged1()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+ <button type="button" id="more.1" onclick="more1()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 8 hours ago</p>
+</div>
+</div>
+<!--article 1 -->
+
+<!--article 2 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.2" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>The statement is not necessarily false, but there is no public record at the time of writing that President Biden has explicitly stated a goal to end global hunger by 2030 or that he is planning a "new food conference."<br/><br/> While Biden has shared broad goals about tackling poverty and ensuring food security, there's no specific plan labeled as such making the headline misleading or inaccurate.<br/><br/> Always check with credible and official sources for such information.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from NPR.ORG</p>
+<p style="font-size:12pt">Biden's goal to end hunger by 2030 and his new food conference, explained</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/True/non-medical/biden-goal-to-end-hunger-by-2030-and-his-new-food-conference-explained2022-09-03-22-26-09.jpg" alt="news_image2">
+</div>
+<button type="button" id="like.2" onclick="liked2()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.2" onclick="shared2()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.2" onclick="flagged2()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.2" onclick="more2()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 19 hours ago</p>
+</div>
+</div>
+<!--article 2 -->
+
+<!--article 3 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.3" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    Without further information or context, it's impossible to categorically state that the headline is false.<br/><br/> It would require knowledge of Bill Bennett's statements and the state of reading and math scores to make that judgment.<br/><br/> The verification would involve checking whether Bennett made the quote about falling reading and math scores and whether he used the term "devastation".
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from FOXNEWS.COM</p>
+<p style="font-size:12pt">Bill Bennett on falling reading and math scores: 'Devastation is the right word'</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/True/non-medical/bill-bennett-on-falling-reading-and-math-scores-devastation-is-the-right-word2022-09-03-22-38-35.jpg" alt="news_image3">
+</div>
+<button type="button" id="like.3" onclick="liked3()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.3" onclick="shared3()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.3" onclick="flagged3()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.3" onclick="more3()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 18 hours ago</p>
+</div>
+</div>
+<!--article 3 -->
+
+<!--article 4 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.4" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>This headline is false because U.S hospitals do not receive additional payments to label cause of death as "coronavirus."<br/><br/> According to the American Hospital Association and the Federal Emergency Management Agency, there are no financial incentives to misreport the cause of death for COVID-19 patients.<br/><br/> COVID-19 related costs are reimbursed at a higher rate due to a 20% increase under the Coronavirus Aid, Relief, and Economic Security (CARES) Act, but this additional aid does not rely on the cause of death, but the treatment of the patient who is suffering from COVID-19.<br/><br/> There is a specific and structured process for reporting deaths, making it highly regulated and accurate.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from ORTHOSPINENEWS.COM</p>
+<p style="font-size:12pt">US Hospitals Getting Paid More to Label Cause of Death as 'Coronavirus'</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/False/medical/US%20Hospitals%20Getting%20Paid%20More%20to%20Label%20Cause%20of%20Death%20as%20%E2%80%98Coronavirus%E2%80%992022-08-26-00-47-57.jpg" alt="news_image4">
+</div>
+<button type="button" id="like.4" onclick="liked4()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.4" onclick="shared4()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.4" onclick="flagged4()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.4" onclick="more4()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 13 hours ago</p>
+</div>
+</div>
+<!--article 4 -->
+
+<!--article 5 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.5" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 98% confidence. </p><br/>
+    <p>This headline is false because it misinterprets a Department of Defense (DoD) study completed in 2020, which looked at the impact of flu vaccination on other respiratory diseases but did not specifically examine COVID-19, as it had not yet emerged.<br/><br/> The DoD study found a statistical correlation but not causation between the flu shot and an increased risk of coronaviruses, but these were coronaviruses that cause the common cold, not COVID-19.<br/><br/> Public health bodies like the World Health Organization (WHO) and Centers for Disease Control and Prevention (CDC) have stated there is no evidence to suggest that receiving a flu vaccine increases the risk of getting COVID-19.<br/><br/> Misinterpretation of scientific research can lead to harmful misinformation and confusion among the public.}</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from CHILDRENSHEALTHDEFENSE.ORG</p>
+<p style="font-size:12pt">Pentagon Study: Flu Shot Raises Risk of Coronavirus by 36% (and Other Supporting Studies)</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/False/medical/Pentagon%20Study_%20Flu%20Shot%20Raises%20Risk%20of%20Coronavirus%20by%2036%25%20(and%20Other%20Supporting%20Studies)2022-08-26-01-11-12.jpg" alt="news_image5">
+</div>
+<button type="button" id="like.5" onclick="liked5()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.5" onclick="shared5()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.5" onclick="flagged5()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.5" onclick="more5()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 13 hours ago</p>
+</div>
+</div>
+<!--article 5 -->
+
+<!--article 6 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.6" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>Without further information, it's impossible to definitively state that the headline is false.<br/><br/>As of the time this prompt was written, it is plausible that the Biden administration would be preparing for a potential surge in COVID-19 cases during the winter months.<br/><br/> It's important to fact-check this particular information by referring to reliable sources or official announcements from the Biden administration.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from WASHINGTONTIMES.COM</p>
+<p style="font-size:12pt">Biden team prepares for possible winter surge in COVID-19</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/True/medical/biden-team-prepares-for-possible-winter-surge-in-covid-192022-09-03-22-43-43.jpg" alt="news_image6">
+</div>
+<button type="button" id="like.6" onclick="liked6()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.6" onclick="shared6()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.6" onclick="flagged6()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.6" onclick="more6()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 0 hours ago</p>
+</div>
+</div>
+<!--article 6 -->
+
+<!--article 7 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.7" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>This headline is false because Bill Gates, co-chair of the Bill & Melinda Gates Foundation, never stated that any COVID-19 vaccine could kill nearly 1,000,000 people.<br/><br/> Wrong interpretations of Gates' words or out-of-context quotes might be used to construct false narratives, but Gates has actually emphasized the importance of safety and efficacy in vaccine development.<br/><br/> His foundation has also donated significant funds to fight the COVID-19 pandemic, including supporting the development and distribution of vaccines globally.<br/><br/> Any claim purporting that Gates admitted a vaccine could cause such harm would be a gross misrepresentation of his views and statements.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from CLOVERCHRONICLE.COM</p>
+<p style="font-size:12pt">WATCH: Bill Gates Admits His COVID-19 Vaccine Might KILL Nearly 1,000,000 People</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/False/medical/WATCH_ Bill Gates Admits His COVID-19 Vaccine Might KILL Nearly 1,000,000 People2022-08-26-00-46-02.jpg" alt="news_image7">
+</div>
+<button type="button" id="like.7" onclick="liked7()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); border-color: grey; background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.7" onclick="shared7()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.7" onclick="flagged7()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.7" onclick="more7()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 12 hours ago</p>
+</div>
+</div>
+<!--article 7 -->
+
+<!--article 8 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.8" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>While air pollution can indeed contribute to the development of lung cancer, it is not the leading cause.<br/><br/> According to the World Health Organization and other health institutions, the primary cause of lung cancer is still smoking, including second-hand smoke.br/><br/> Hence, the headline is false because it incorrectly identifies air pollution as the leading cause of lung cancer.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from EXPRESS.CO.UK</p>
+<p style="font-size:12pt">Air pollution now leading cause of lung cancer</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/Misleading/medical/air-pollution-now-leading-cause-of-lung-cancer2022-10-18-21-46-02.jpg" alt="news_image8">
+</div>
+<button type="button" name="8" id="like.8" onclick="liked8()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.8" onclick="shared8()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.8" onclick="flagged8()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.8" onclick="more8()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 9 hours ago</p>
+</div>
+</div>
+<!--article 8 -->
+
+<!--article 9 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.9" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>There is currently no scientific evidence to support the claim that COVID-19 tests, either PCR or quick/rapid antigen tests, can cause cancer.<br/><br/>PCR and rapid antigen tests involve taking a sample from the nose or throat using a swab.<br/><br/> According to the World Health Organization and other health agencies, these tests and swabs have been deemed safe for use.<br/><br/> Their materials do not contain any known cancer-causing substances.<br/><br/>Assertions about medical and health matters should ideally come from rigorous studies carried out by medical professionals, and preferably be peer-reviewed. Regarding this claim's source and the lack of scientific consensus or validity, it should be treated as misinformation.<br/><br/> 
+
+It's important to continue testing for the COVID-19 virus to monitor its spread and isolate those infected to prevent further transmission.<br/><br/> It's a critical part of the global response to the pandemic.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from TRUTHUNMUTED.ORG</p>
+<p style="font-size:12pt">Stop COVID Testing Immediately: PCR and Quick Test Swabs May be Cancer-Causing</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/Misleading/medical/Stop COVID Testing Immediately_ PCR and Quick Test Swabs May be Cancer-Causing2022-08-26-19-51-07.jpg" alt="news_image9">
+</div>
+<button type="button" id="like.9" onclick="liked9()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.9" onclick="shared9()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.9" onclick="flagged9()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.9" onclick="more9()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 6 hours ago</p>
+</div>
+</div>
+<!--article 9 -->
+
+<!--article 10 -->
+<div class="panel-group">
+  <div class="talk-bubble tri-right left-in" id="explain.10" style="position:relative; float:right; display: none;">
+  <div class="talktext">
+    <p>The predicted reliability of this article is: False with 100% confidence. </p><br/>
+    <p>The headline claiming that former US President Bill Clinton brought his teenage daughter, Chelsea Clinton, to Epstein Island is false because there is no credible evidence or reports supporting this statement.<br/><br/> Epstein Island is notorious for its previous owner, financier Jeffrey Epstein, who has been convicted of sex crimes.<br/><br/> Flight records of Epstein's private jet and the guest logs for his estate, though they showed that Bill Clinton has been in close association with Epstein, never mentioned Chelsea Clinton.<br/><br/> Therefore, the claim can be considered unsubstantiated and misleading.</p>
+  </div>
+</div>
+<div class="story-excerpt">
+
+<div style="padding-left:20px;">
+<p style="font-size:9pt; display: inline">Reposted from DUNNING-KRUGER-TIMES.COM</p>
+<p style="font-size:12pt">Bill Clinton Brought His Teenage Daughter To Epstein Island This is actually pretty disturbing</p>
+<img src="https://mturk-cb-1.s3.us-east-2.amazonaws.com/pretest_12/cropped/False/non-medical/Bill Clinton Brought His Teenage Daughter To Epstein Island.png" alt="news_image10">
+</div>
+<button type="button" id="like.10" onclick="liked10()" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Like</button>
+<button type="button" id="share.10" onclick="shared10()" style="background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;&nbsp;&nbsp;Share</button>
+<button type="button" id="flag.10" onclick="flagged10()" style="background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);">&nbsp;&nbsp;Flag</button>
+<button type="button" id="more.10" onclick="more10()" style="box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0; border-style: none;border-radius: 24px;font-size:9pt; float:right;"><strong>Find out more ...</strong></button>
+<p style="font-size:9pt; display: inline;">&nbsp;&nbsp;&nbsp;&nbsp;posted 9 hours ago</p>
+</div>
+</div>
+<!--article 10 -->
+
+
+<input class="btn btn-primary" id="submitButton" onclick="" type="submit" value="LOG OUT" />
+
+</div>
+</div>
+
+<br />
+<!-- </div>  end sq1 -->
+<!-- end intents3 --></div>
+ 
+<!-- end sq1 --></div>
+<!--end before qs--><!-- </div> end before div  --><br />
+<br />
+<br />
+&nbsp;
+<p style="font-size:12pt;width:350pt"> &nbsp; &nbsp; Optional Feedback: Thanks for filling out the questions above! If something about the hit was unclear, please leave a comment in the box below. We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.</p>
+<textarea cols="50" name="commentbox" rows="2" style="margin-left:10px;margin-top:10px"></textarea><br />
+<br />
+&nbsp;
+<!-- <center onclick="getNext();"><span id="warning" style="display:none;color:red">Type in at least one emotion word before continuing... </span> <input class="btn btn-primary" id="submitButton" onclick="getNext()" type="submit" value="Submit" /></center> -->
+</div>
+<!-- end cell --></div>
+<!-- end page --></div>
+<input type="text" id="is_shared1" name="is_shared1" value="false" style="display:none;">
+<input type="text" id="is_shared2" name="is_shared2" value="false" style="display:none;">
+<input type="text" id="is_shared3" name="is_shared3" value="false" style="display:none;">
+<input type="text" id="is_shared4" name="is_shared4" value="false" style="display:none;">
+<input type="text" id="is_shared5" name="is_shared5" value="false" style="display:none;">
+<input type="text" id="is_shared6" name="is_shared6" value="false" style="display:none;">
+<input type="text" id="is_shared7" name="is_shared7" value="false" style="display:none;">
+<input type="text" id="is_shared8" name="is_shared8" value="false" style="display:none;">
+<input type="text" id="is_shared9" name="is_shared9" value="false" style="display:none;">
+<input type="text" id="is_shared10" name="is_shared10" value="false" style="display:none;">
+
+<input type="text" id="is_liked1" name="is_liked1" value="false" style="display:none;">
+<input type="text" id="is_liked2" name="is_liked2" value="false" style="display:none;">
+<input type="text" id="is_liked3" name="is_liked3" value="false" style="display:none;">
+<input type="text" id="is_liked4" name="is_liked4" value="false" style="display:none;">
+<input type="text" id="is_liked5" name="is_liked5" value="false" style="display:none;">
+<input type="text" id="is_liked6" name="is_liked6" value="false" style="display:none;">
+<input type="text" id="is_liked7" name="is_liked7" value="false" style="display:none;">
+<input type="text" id="is_liked8" name="is_liked8" value="false" style="display:none;">
+<input type="text" id="is_liked9" name="is_liked9" value="false" style="display:none;">
+<input type="text" id="is_liked10" name="is_liked10" value="false" style="display:none;">
+
+<input type="text" id="is_flagged1" name="is_flagged1" value="false" style="display:none;">
+<input type="text" id="is_flagged2" name="is_flagged2" value="false" style="display:none;">
+<input type="text" id="is_flagged3" name="is_flagged3" value="false" style="display:none;">
+<input type="text" id="is_flagged4" name="is_flagged4" value="false" style="display:none;">
+<input type="text" id="is_flagged5" name="is_flagged5" value="false" style="display:none;">
+<input type="text" id="is_flagged6" name="is_flagged6" value="false" style="display:none;">
+<input type="text" id="is_flagged7" name="is_flagged7" value="false" style="display:none;">
+<input type="text" id="is_flagged8" name="is_flagged8" value="false" style="display:none;">
+<input type="text" id="is_flagged9" name="is_flagged9" value="false" style="display:none;">
+<input type="text" id="is_flagged10" name="is_flagged10" value="false" style="display:none;">
+
+<input type="text" id="num_interact1" name="num_interact1" value="0" style="display:none;">
+<input type="text" id="num_interact2" name="num_interact2" value="0" style="display:none;">
+<input type="text" id="num_interact3" name="num_interact3" value="0" style="display:none;">
+<input type="text" id="num_interact4" name="num_interact4" value="0" style="display:none;">
+<input type="text" id="num_interact5" name="num_interact5" value="0" style="display:none;">
+<input type="text" id="num_interact6" name="num_interact6" value="0" style="display:none;">
+<input type="text" id="num_interact7" name="num_interact7" value="0" style="display:none;">
+<input type="text" id="num_interact8" name="num_interact8" value="0" style="display:none;">
+<input type="text" id="num_interact9" name="num_interact9" value="0" style="display:none;">
+<input type="text" id="num_interact10" name="num_interact10" value="0" style="display:none;">
+
+
+
+<!-- end wrapper --></fieldset>
+</section>
+<!-- End Content Body --><!-- close container --><script type="text/javascript">
+window.onload = function() {
+  //showexamples()
+}
+
+var current = 1;
+var moved = []; //pages which have been moved by the randomization
+var movedto = [];
+var emotions = [];
+var firstclick = true;
+ //takes randomization into account
+ function effectivePage(pagenum) {
+     var index = moved.indexOf(pagenum);
+     if (index == -1) {
+         return pagenum;
+     } else {
+         return movedto[index];
+     }
+ }
+
+ var numberText = []; //stores divs which need to be updated when the page changes
+ var pntexts = []; //texts in them
+
+   function show_label(){
+    var el = document.getElementById('author1')
+    var el2 = document.getElementById('author2')  
+    $label = "misinformation" 
+    if ($label.value == "real") {
+    	el.style.display = "block";
+      	el2.style.display = "none";
+    } else{
+    	el.style.display = "none";
+      	el2.style.display = "block";
+    }
+
+  }
+
+   function consented() {
+        if (document.getElementById('consent').checked) {
+            document.getElementById("task").style.display = "block";
+        } else {
+            document.getElementById("task").style.display = "none";
+        }
+    }
+
+    function skip1() {
+        document.getElementById("q1").style.display = "none";
+        document.getElementById("q2").style.display = "block";
+    }
+
+    function skip2() {
+        document.getElementById("q2").style.display = "none";
+        document.getElementById("q3").style.display = "block";
+        document.getElementById("response").style.display = "block";
+    }
+
+
+  function more1() {
+        if (document.getElementById("explain.1").style.display == "none") {
+            document.getElementById("explain.1").style.display = "block";
+            document.getElementById("num_interact1").value = parseInt(document.getElementById("num_interact1").value) + 1;
+        } else {
+            document.getElementById("explain.1").style.display = "none";
+        }
+    }
+
+  function liked1() {
+    if (document.getElementById("is_liked1").value == "true"){
+        document.getElementById("like.1").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked1").value = "false";
+    }        
+      else{
+        document.getElementById("like.1").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked1").value = "true";
+      }
+    }
+
+      function shared1() {
+    if (document.getElementById("is_shared1").value == "true"){
+        document.getElementById("share.1").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared1").value = "false";
+    }
+      else{
+        document.getElementById("share.1").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messagxing-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared1").value = "true";
+      }
+    }
+
+      function flagged1() {
+    if (document.getElementById("is_flagged1").value == "true"){
+        document.getElementById("flag.1").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged1").value = "false";
+    }
+      else{
+        document.getElementById("flag.1").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged1").value = "true";
+      }
+    }
+
+      function more2() {
+        if (document.getElementById("explain.2").style.display == "none") {
+            document.getElementById("explain.2").style.display = "block";
+            document.getElementById("num_interact2").value = parseInt(document.getElementById("num_interact2").value) + 1;
+        } else {
+            document.getElementById("explain.2").style.display = "none";
+        }
+    }
+
+
+  function liked2() {
+    if (document.getElementById("is_liked2").value == "true"){
+        document.getElementById("like.2").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked2").value = "false";
+    }        
+      else{
+        document.getElementById("like.2").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked2").value = "true";
+      }
+    }
+
+      function shared2() {
+    if (document.getElementById("is_shared2").value == "true"){
+        document.getElementById("share.2").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared2").value = "false";
+    }
+      else{
+        document.getElementById("share.2").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared2").value = "true";
+      }
+    }
+
+      function flagged2() {
+    if (document.getElementById("is_flagged2").value == "true"){
+        document.getElementById("flag.2").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged2").value = "false";
+    }
+      else{
+        document.getElementById("flag.2").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged2").value = "true";
+      }
+    }
+
+          function more3() {
+        if (document.getElementById("explain.3").style.display == "none") {
+            document.getElementById("explain.3").style.display = "block";
+            document.getElementById("num_interact3").value = parseInt(document.getElementById("num_interact3").value) + 1;
+        } else {
+            document.getElementById("explain.3").style.display = "none";
+        }
+    }
+
+
+  function liked3() {
+    if (document.getElementById("is_liked3").value == "true"){
+        document.getElementById("like.3").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked3").value = "false";
+    }        
+      else{
+        document.getElementById("like.3").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked3").value = "true";
+      }
+    }
+
+      function shared3() {
+    if (document.getElementById("is_shared3").value == "true"){
+        document.getElementById("share.3").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared3").value = "false";
+    }
+      else{
+        document.getElementById("share.3").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared3").value = "true";
+      }
+    }
+
+      function flagged3() {
+    if (document.getElementById("is_flagged3").value == "true"){
+        document.getElementById("flag.3").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged3").value = "false";
+    }
+      else{
+        document.getElementById("flag.3").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged3").value = "true";
+      }
+    }
+
+              function more4() {
+        if (document.getElementById("explain.4").style.display == "none") {
+            document.getElementById("explain.4").style.display = "block";
+            document.getElementById("num_interact4").value = parseInt(document.getElementById("num_interact4").value) + 1;
+        } else {
+            document.getElementById("explain.4").style.display = "none";
+        }
+    }
+
+
+  function liked4() {
+    if (document.getElementById("is_liked4").value == "true"){
+        document.getElementById("like.4").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked4").value = "false";
+    }        
+      else{
+        document.getElementById("like.4").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked4").value = "true";
+      }
+    }
+
+      function shared4() {
+    if (document.getElementById("is_shared4").value == "true"){
+        document.getElementById("share.4").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared4").value = "false";
+    }
+      else{
+        document.getElementById("share.4").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared4").value = "true";
+      }
+    }
+
+      function flagged4() {
+    if (document.getElementById("is_flagged4").value == "true"){
+        document.getElementById("flag.4").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged4").value = "false";
+    }
+      else{
+        document.getElementById("flag.4").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged4").value = "true";
+      }
+    }
+
+              function more5() {
+        if (document.getElementById("explain.5").style.display == "none") {
+            document.getElementById("explain.5").style.display = "block";
+            document.getElementById("num_interact5").value = parseInt(document.getElementById("num_interact5").value) + 1;
+        } else {
+            document.getElementById("explain.5").style.display = "none";
+        }
+    }
+
+
+  function liked5() {
+    if (document.getElementById("is_liked5").value == "true"){
+        document.getElementById("like.5").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked5").value = "false";
+    }        
+      else{
+        document.getElementById("like.5").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked5").value = "true";
+      }
+    }
+
+      function shared5() {
+    if (document.getElementById("is_shared5").value == "true"){
+        document.getElementById("share.5").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared5").value = "false";
+    }
+      else{
+        document.getElementById("share.5").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared5").value = "true";
+      }
+    }
+
+      function flagged5() {
+    if (document.getElementById("is_flagged5").value == "true"){
+        document.getElementById("flag.5").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged5").value = "false";
+    }
+      else{
+        document.getElementById("flag.5").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged5").value = "true";
+      }
+    }
+
+              function more6() {
+        if (document.getElementById("explain.6").style.display == "none") {
+            document.getElementById("explain.6").style.display = "block";
+            document.getElementById("num_interact6").value = parseInt(document.getElementById("num_interact6").value) + 1;
+        } else {
+            document.getElementById("explain.6").style.display = "none";
+        }
+    }
+
+
+  function liked6() {
+    if (document.getElementById("is_liked6").value == "true"){
+        document.getElementById("like.6").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked6").value = "false";
+    }        
+      else{
+        document.getElementById("like.6").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked6").value = "true";
+      }
+    }
+
+      function shared6() {
+    if (document.getElementById("is_shared6").value == "true"){
+        document.getElementById("share.6").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared6").value = "false";
+    }
+      else{
+        document.getElementById("share.6").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared6").value = "true";
+      }
+    }
+
+      function flagged6() {
+    if (document.getElementById("is_flagged6").value == "true"){
+        document.getElementById("flag.6").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged6").value = "false";
+    }
+      else{
+        document.getElementById("flag.6").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged6").value = "true";
+      }
+    }
+
+              function more7() {
+        if (document.getElementById("explain.7").style.display == "none") {
+            document.getElementById("explain.7").style.display = "block";
+            document.getElementById("num_interact7").value = parseInt(document.getElementById("num_interact7").value) + 1;            
+        } else {
+            document.getElementById("explain.7").style.display = "none";
+        }
+    }
+
+
+  function liked7() {
+    if (document.getElementById("is_liked7").value == "true"){
+        document.getElementById("like.7").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked7").value = "false";
+    }        
+      else{
+        document.getElementById("like.7").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked7").value = "true";
+      }
+    }
+
+      function shared7() {
+    if (document.getElementById("is_shared7").value == "true"){
+        document.getElementById("share.7").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared7").value = "false";
+    }
+      else{
+        document.getElementById("share.7").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared7").value = "true";
+      }
+    }
+
+      function flagged7() {
+    if (document.getElementById("is_flagged7").value == "true"){
+        document.getElementById("flag.7").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged7").value = "false";
+    }
+      else{
+        document.getElementById("flag.7").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged7").value = "true";
+      }
+    }
+
+               function more8() {
+        if (document.getElementById("explain.8").style.display == "none") {
+            document.getElementById("explain.8").style.display = "block";
+            document.getElementById("num_interact8").value = parseInt(document.getElementById("num_interact8").value) + 1;
+        } else {
+            document.getElementById("explain.8").style.display = "none";
+        }
+    }
+
+
+  function liked8() {
+    if (document.getElementById("is_liked8").value == "true"){
+        document.getElementById("like.8").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked8").value = "false";
+    }        
+      else{
+        document.getElementById("like.8").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked8").value = "true";
+      }
+    }
+
+      function shared8() {
+    if (document.getElementById("is_shared8").value == "true"){
+        document.getElementById("share.8").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared8").value = "false";
+    }
+      else{
+        document.getElementById("share.8").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared8").value = "true";
+      }
+    }
+
+      function flagged8() {
+    if (document.getElementById("is_flagged8").value == "true"){
+        document.getElementById("flag.8").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged8").value = "false";
+    }
+      else{
+        document.getElementById("flag.8").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged8").value = "true";
+      }
+    }
+
+              function more9() {
+        if (document.getElementById("explain.9").style.display == "none") {
+            document.getElementById("explain.9").style.display = "block";
+            document.getElementById("num_interact9").value = parseInt(document.getElementById("num_interact9").value) + 1;
+        } else {
+            document.getElementById("explain.9").style.display = "none";
+        }
+    }
+
+  
+  function liked9() {
+    if (document.getElementById("is_liked9").value == "true"){
+        document.getElementById("like.9").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked9").value = "false";
+    }        
+      else{
+        document.getElementById("like.9").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked9").value = "true";
+      }
+    }
+
+      function shared9() {
+    if (document.getElementById("is_shared9").value == "true"){
+        document.getElementById("share.9").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared9").value = "false";
+    }
+      else{
+        document.getElementById("share.9").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared9").value = "true";
+      }
+    }
+
+      function flagged9() {
+    if (document.getElementById("is_flagged9").value == "true"){
+        document.getElementById("flag.9").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged9").value = "false";
+    }
+      else{
+        document.getElementById("flag.9").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged9").value = "true";
+      }
+    }
+
+           function more10() {
+        if (document.getElementById("explain.10").style.display == "none") {
+            document.getElementById("explain.10").style.display = "block";
+            document.getElementById("num_interact10").value = parseInt(document.getElementById("num_interact10").value) + 1;
+        } else {
+            document.getElementById("explain.10").style.display = "none";
+
+        }
+    }
+
+
+  function liked10() {
+    if (document.getElementById("is_liked10").value == "true"){
+        document.getElementById("like.10").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+         document.getElementById("is_liked10").value = "false";
+    }        
+      else{
+        document.getElementById("like.10").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_liked10").value = "true";
+      }
+    }
+
+      function shared10() {
+    if (document.getElementById("is_shared10").value == "true"){
+        document.getElementById("share.10").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared10").value = "false";
+    }
+      else{
+        document.getElementById("share.10").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_shared10").value = "true";
+      }
+    }
+
+      function flagged10() {
+    if (document.getElementById("is_flagged10").value == "true"){
+        document.getElementById("flag.10").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged10").value = "false";
+    }
+      else{
+        document.getElementById("flag.10").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
+        document.getElementById("is_flagged10").value = "true";
+      }
+    }
+
+  function wipeclean(){
+    var el = document.getElementById('input2a1')
+    if (el.value == "to (be)") {
+      el.value = "";
+      el.style.color = "black";
+    }
+  }
+
+  function unrequireall(keep_ids) {
+    var els = [//'radio1aa', 'radio1ab', //q1
+               'radio2a', 'radio2b', //q2
+                'input2a1', // q2a
+                'db1r1', 'db1r2', 'db1r3', 'db1r4', 'db1r5', // likert 2b
+                'input3a1', // q4
+                'radio4a', 'radio4b', // q5
+                'input4a1', // q5a
+                'db5r1', 'db5r2', 'db5r3', 'db5r4', 'db5r5']; // likert 5
+    for(var i = 0; i < els.length; i++) {
+      if (list_contains(els[i], keep_ids) == -1) {
+        notrequired(els[i]);
+      }
+    }
+    unshowhelper('allqs');
+          
+  }
+
+  function list_contains(val, list) {
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] == val) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function requireall() {
+    var els = [//'radio1aa', 'radio1ab', //q1
+               'radio2a', 'radio2b', //q2
+                'input2a1', // q2a
+                'db1r1', 'db1r2', 'db1r3', 'db1r4', 'db1r5', // likert 2b
+                'input3a1', // q4
+                'radio4a', 'radio4b', // q5
+                'input4a1', // q5a
+                'db5r1', 'db5r2', 'db5r3', 'db5r4', 'db5r5']; // likert 5
+    for(var i = 0; i < els.length; i++) {
+      required(els[i]);
+    }
+    showhelper('allqs');
+  }
+
+  function unshowhelper(numid){
+    var elem = document.getElementById(numid);
+    elem.style.display = "none";
+  }
+
+  function showhelper(numid){
+    var elem = document.getElementById(numid);
+    elem.style.display = "table";
+  }
+
+  function notrequired(numid){
+    var elem = document.getElementById(numid);
+    elem.required = false;
+  }
+
+  function required(numid) {
+    var elem = document.getElementById(numid);
+    elem.required = true;
+  }
+
+
+function show(numid1, numid2){
+  showhelper(numid1);
+  required(numid2);
+}
+
+function unshow(numid1, numid2){
+  unshowhelper(numid1);
+  notrequired(numid2);
+}
+
+
+function replacetext(){
+  var el = document.getElementById('input2a1')
+  if (el.value == "") {
+    el.value = "to (be)";
+    el.style.color = "grey";
+  }
+  // document.getElementById("input1a1").value = "to (be)";
+  // document.getElementById("input1a1").style.color = "grey";
+}
+
+//function showexamples(){
+//  var el = document.getElementById('exflag');
+//  var n = el.innerHTML;
+//  var exlist = ['ex1', 'ex2', 'ex3', 'ex4', 'ex5'];
+//  if (n > 0) {
+//    document.getElementById('examples').style.display = 'table';
+//  }
+//  for (var i = 0; i < n; i++) {
+//    document.getElementById(exlist[i]).style.display = 'table';
+//  }
+//
+//}
+
+//var coll = document.getElementsByClassName("collapsible");
+//var i;
+
+//for (i = 0; i < coll.length; i++) {
+//  coll[i].addEventListener("click", function() {
+//    this.classList.toggle("active");
+//    var content = this.nextElementSibling;
+//    if (content.style.display === "block") {
+//      content.style.display = "none";
+//    } else {
+//      content.style.display = "block";
+//    }
+//  });
+//}
+
+
+</script>
+<style type="text/css">        th {
+      font-weight: normal;
+    }
+
+    fieldset { padding: 10px; background:#fbfbfb; border-radius:5px; margin-bottom:5px; }
+    .columns{
+        list-style-type: none;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        columns: 2;
+        list-style-position: inside;
+    }
+    .unbulleted{
+        list-style-type: none;
+        padding:7px;
+        margin:0px;
+    }
+
+    #author1{
+           border-radius:15px;
+    }
+    #author2{
+           border-radius:15px;
+    }
+    #author3{
+           border-radius:15px;
+    }
+    #author4{
+           border-radius:15px;
+    }
+    #author5{
+           border-radius:15px;
+    }
+    #author6{
+           border-radius:15px;
+    }
+    #author7{
+           border-radius:15px;
+    }
+    #type_news{
+           border-radius:15px;
+       }
+    #demo{
+           border-radius:15px;
+    }
+
+    /* CSS talk bubble */
+.talk-bubble {
+  margin: 40px;
+  display: inline-block;
+  position: relative;
+  width: 400px;
+  height: auto;
+  background-color: lightyellow;
+}
+
+/* Right triangle placed top left flush. */
+.tri-right.border.left-top:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -40px;
+  right: auto;
+  top: -8px;
+  bottom: auto;
+  border: 32px solid;
+  border-color: #666 transparent transparent transparent;
+}
+.tri-right.left-top:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 0px;
+  bottom: auto;
+  border: 22px solid;
+  border-color: lightyellow transparent transparent transparent;
+}
+
+/* Right triangle, left side slightly down */
+.tri-right.border.left-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -40px;
+  right: auto;
+  top: 30px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.left-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 38px;
+  bottom: auto;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+
+/*Right triangle, placed bottom left side slightly in*/
+.tri-right.border.btm-left:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -8px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 32px solid;
+  border-color: transparent transparent transparent #666;
+}
+.tri-right.btm-left:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 22px solid;
+  border-color: transparent transparent transparent lightyellow;
+}
+
+/*Right triangle, placed bottom left side slightly in*/
+.tri-right.border.btm-left-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 transparent transparent #666;
+}
+.tri-right.btm-left-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 38px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow transparent transparent lightyellow;
+}
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 30px;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 38px;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+/*
+  left: -8px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 32px solid;
+  border-color: transparent transparent transparent #666;
+  left: 0px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 22px solid;
+  border-color: transparent transparent transparent lightyellow;
+
+/*Right triangle, placed bottom right side slightly in*/
+.tri-right.border.btm-right:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -8px;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #666 #666 transparent transparent;
+}
+.tri-right.btm-right:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 0px;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: lightyellow lightyellow transparent transparent;
+}
+
+/* Right triangle, right side slightly down*/
+.tri-right.border.right-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -40px;
+  top: 30px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: #666 transparent transparent #666;
+}
+.tri-right.right-in:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -20px;
+  top: 38px;
+  bottom: auto;
+  border: 12px solid;
+  border-color: lightyellow transparent transparent lightyellow;
+}
+
+/* Right triangle placed top right flush. */
+.tri-right.border.right-top:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -40px;
+  top: -8px;
+  bottom: auto;
+  border: 32px solid;
+  border-color: #666 transparent transparent transparent;
+}
+.tri-right.right-top:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -20px;
+  top: 0px;
+  bottom: auto;
+  border: 20px solid;
+  border-color: lightyellow transparent transparent transparent;
+}
+
+/* talk bubble contents */
+.talktext{
+  padding: 1em;
+  text-align: left;
+  line-height: 1.5em;
+}
+.talktext p{
+  /* remove webkit p margins */
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+
+
+    .story-excerpt {
+       margin:40 auto;
+       min-width: 500px;
+       border:2px #333333;
+       background-color: #f2f2f2;
+       border-style: solid;
+       box-shadow: 5px 10px 8px #888888;
+       padding-right:10px;
+       padding-left:10px;
+       display:table;
+       border-radius:15px;
+    }
+    table{
+       font-size:10pt;
+    }
+
+
+    /* Tooltip container */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+
+    /* Tooltip text */
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+    }
+
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    .foo {
+      width:120px;
+      color:black;
+    }
+
+
+
+        form .likert {
+          list-style:none;
+          width:100%;
+          margin:0;
+          padding:0 0 35px;
+          display:block;
+          border-bottom:2px solid #efefef;
+        }
+        form .likert:last-of-type {border-bottom:0;}
+        form .likert:before {
+          content: '';
+          position:relative;
+          top:11px;
+          left:9.5%;
+          display:block;
+          background-color:#efefef;
+          height:4px;
+          width:78%;
+        }
+        form .likert li {
+          display:inline-block;
+          width:19%;
+          text-align:center;
+          vertical-align: top;
+        }
+        form .likert li input[type=radio] {
+          display:block;
+          position:relative;
+          top:0;
+          left:50%;
+          margin-left:-6px;
+
+        }
+        form .likert li label {width:100%;}
+    .radio3 + label::after{
+        width: 1.5em;
+        height: 1.5em;
+        position:relative;
+        top:0;
+        margin-left:-6px;
+        background-color: #fff;
+        content: '';
+        display: inline-block;
+        border:5px solid #fff;
+        box-shadow: 0 0 1pt 2pt black;
+        border-radius: 50%;
+        margin: 0 0.5em;
+    }
+
+    .radio4 + label::before {
+        width: 1.5em;
+        height: 1.5em;
+        position:relative;
+        top:0;
+        margin-left:-6px;
+        background-color: #fff;
+        content: '';
+        display: inline-block;
+        border:5px solid #fff;
+        box-shadow: 0 0 1pt 2pt black;
+        border-radius: 50%;
+        margin: 0 0.5em;
+    }
+    .example-table td, .example-table th{
+       border:1px solid grey;
+       text-align:center;
+       font-size: 10pt;
+    }
+
+    }
+</style>
