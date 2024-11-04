@@ -241,7 +241,7 @@
       output = output.split(/\r?\n|\r|\n/g);
       headline1.innerHTML = output[0].split("}")[0];
       console.log(output[1])
-      document.getElementById("img1").src = output[1];
+      document.getElementById("img1").src = output[1].split("img1: ")[1];
       
     };
     reader.readAsText(file);
