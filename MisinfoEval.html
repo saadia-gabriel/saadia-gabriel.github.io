@@ -239,15 +239,16 @@
       console.log('reader.onload');
       var output = String(evt.target.result).split("headline1: ")[1]
       output = output.split(/\r?\n|\r|\n/g);
-      headline1.innerHTML = output[0].split("}")[0];
+      headline1.innerHTML = output[0].split("}\")[0];
       var img1_url = output[1].match(/https?:\/\/[^\s]+/)[0]
       console.log(img1_url)
-      document.getElementById("img1").src = img1_url.split("}")[0];
-      if (parseInt(output[2].split("time1: ")[1]) == 1){
-        document.getElementById("time1").innerText = "posted " + String(time1) + " hour ago";
+      document.getElementById("img1").src = img1_url.split("}\")[0]; 
+      var time_1 = parseInt(output[2].split("time1: ")[1]); 
+      if (time_1 == 1){
+        document.getElementById("time1").innerText = "posted " + String(time_1) + " hour ago";
       }
       else {
-        document.getElementById("time1").innerText = "posted " + String(time1) + " hours ago";  
+        document.getElementById("time1").innerText = "posted " + String(time_1) + " hours ago";  
       }
       var source_1 = output[3].split("source1: ")[1];
       document.getElementById("source1").innerText = "Reposted from " + source_1 
