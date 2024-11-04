@@ -244,10 +244,15 @@
       console.log(img1_url)
       document.getElementById("img1").src = img1_url.split("}")[0];
       var time1 = parseInt(output[2].split("time1: ")[1]);
-      if time1 == 1:
-        document.getElementById("time1").innerText = "posted " + String(time1) + " hour ago"; 
-      else:
-        document.getElementById("time1").innerText = "posted " + String(time1) + " hours ago";      
+      if (time1 == 1){
+        document.getElementById("time1").innerText = "posted " + String(time1) + " hour ago";
+      }
+      else {
+        document.getElementById("time1").innerText = "posted " + String(time1) + " hours ago";  
+      }
+      var source1 = output[3].split("source1: ")[1];
+      document.getElementById("source1").innerText = "Reposted from " + source1 
+      
     };
     reader.readAsText(file);
   }
