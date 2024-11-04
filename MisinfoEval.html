@@ -237,7 +237,10 @@
     console.log('reading file')
     reader.onload = function (evt) {
       console.log('reader.onload');
-      var output = String(evt.target.result).split("headline1: ")[1].split(/\r?\n|\r|\n/g);
+      var output = String(evt.target.result).split("headline1: ")[1]
+      console.log(output)
+      output = output.split(/\r?\n|\r|\n/g);
+      console.log(output)
       headline1.innerHTML = output[0];
     };
     reader.readAsText(file);
