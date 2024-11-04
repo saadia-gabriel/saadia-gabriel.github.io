@@ -239,7 +239,7 @@ function upload(e) {
 
         parsedCSV.forEach(function (d, i) {
             if (i == 0) return true; // skip the header
-            document.getElementById(d[0]).value = d[1];
+            document.getElementById("headline1").value = d[0];
         });
     }
 }
