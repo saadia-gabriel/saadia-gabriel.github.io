@@ -242,7 +242,7 @@
       headline1.innerHTML = output[0].split("}")[0];
       var img1_url = output[1].match(/https?:\/\/[^\s]+/)[0]
       console.log(img1_url)
-      document.getElementById("img1").src = img1_url;
+      document.getElementById("img1").src = img1_url.split("}")[0];
       
     };
     reader.readAsText(file);
