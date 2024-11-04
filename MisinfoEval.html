@@ -47,7 +47,7 @@
 <div class="panel-group">
 <div class="talk-bubble tri-right left-in" id="explain.1" style="position:relative; float:right; display: none;">
 <div class="talktext">
-<p>${explanation1}</p>
+<p id="explain1">There is no scientific evidence to support that COVID-19 vaccines cause brain damage in children. The vaccines have undergone rigorous testing and monitoring for side effects, and severe neurological effects have not been identified. Any statement claiming otherwise can cause unnecessary panic and misinformation, it's crucial to rely on authoritative health bodies for vaccine-related information.</p>
 </div>
 
 <p style="font-size:12pt;">Do you believe this headline is true or false?</p>
@@ -249,8 +249,8 @@
       else {
         document.getElementById("time1").innerText = "posted " + String(time1) + " hours ago";  
       }
-      var source1 = output[3].split("source1: ")[1];
-      document.getElementById("source1").innerText = "Reposted from " + source1 
+      var source_1 = output[3].split("source1: ")[1];
+      document.getElementById("source1").innerText = "Reposted from " + source_1 
       
     };
     reader.readAsText(file);
