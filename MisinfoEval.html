@@ -29,7 +29,7 @@
      </div>
      <div class="panel panel-primary" style="border-radius: 25px; background-color: #dadfe0; box-shadow: 10px 10px;">
      <div class="panel-heading">&nbsp;&nbsp;<strong>Upload File (Optional):</strong></div>
-           <input id="upload" type="file">
+    <button onclick="readFile()">Read File</button><br/>
      </div>
    </div>
      
@@ -222,27 +222,21 @@
 
   </body>
 
-<script src="//d3js.org/d3.v3.min.js">
-document.getElementById("upload").addEventListener("change", upload, false);
+<script>
 
-function upload(e) {
-    var data = null;
-    var file = e.target.files[0];
+  let input = document.getElementById('file');
+  let contents = document.getElementById('contents');
 
-    var reader = new FileReader();
+   function readFile () {
+    let file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function (evt) {
+      console.log('reader.onload');
+      headline1.innerHTML = String(evt.target.result);
+    };
     reader.readAsText(file);
-    reader.onload = function (event) {
-        var csvData = event.target.result;
+  }
 
-        var parsedCSV = d3.csv.parseRows(csvData);
-        console.log(parsedCSV);
-        parsedCSV.forEach(function (d, i) {
-            if (i == 0) return true; // skip the header
-            console.log(d[0]);
-            document.getElementById("headline1").innerText = d[0];
-        });
-    }
-}
 
   function more1() {
         if (document.getElementById("explain.1").style.display == "none") {
