@@ -231,13 +231,16 @@
 
    function readFile () {
     let file = input.files[0];
-    const reader = new FileReader();
-    console.log('reading file')
-    reader.onload = function (evt) {
-      console.log('reader.onload');
-      headline1.innerHTML = String(evt.target.result);
-    };
-    reader.readAsText(file);
+     d3.csv(file, function(data){
+    console.log(data);
+     });
+    //const reader = new FileReader();
+    //console.log('reading file')
+    //reader.onload = function (evt) {
+    //  console.log('reader.onload');
+    //  headline1.innerHTML = String(evt.target.result);
+    //};
+    //reader.readAsText(file);
   }
      
   </script>
