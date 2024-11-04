@@ -239,10 +239,9 @@
       console.log('reader.onload');
       var output = String(evt.target.result).split("headline1: ")[1]
       output = output.split(/\r?\n|\r|\n/g);
-      headline1.innerHTML = output[0].slice(0, -2);
+      headline1.innerHTML = output[0].slice(0, -1);
       var img1_url = output[1].match(/https?:\/\/[^\s]+/)[0]
-      console.log(img1_url)
-      document.getElementById("img1").src = img1_url.slice(0, -2); 
+      document.getElementById("img1").src = img1_url; 
       var time_1 = parseInt(output[2].split("time1: ")[1]); 
       if (time_1 == 1){
         document.getElementById("time1").innerText = "posted " + String(time_1) + " hour ago";
