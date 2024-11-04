@@ -233,7 +233,8 @@
 
    function readFile () {
     let file = input.files[0];
-     d3.csv(file, function(data){
+    console.log(file);
+    d3.csv(file, function(data){
     console.log(data);
      });
     //const reader = new FileReader();
