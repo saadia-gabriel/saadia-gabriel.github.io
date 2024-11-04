@@ -240,8 +240,9 @@
       var output = String(evt.target.result).split("headline1: ")[1]
       output = output.split(/\r?\n|\r|\n/g);
       headline1.innerHTML = output[0].split("}")[0];
-      console.log(output[1].split("img1: ")[1])
-      document.getElementById("img1").src = output[1].split("img1: ")[1];
+      var img1_url = output[1].match(/https?:\/\/[^\s]+/)[0]
+      console.log(img1_url)
+      document.getElementById("img1").src = img1_url;
       
     };
     reader.readAsText(file);
