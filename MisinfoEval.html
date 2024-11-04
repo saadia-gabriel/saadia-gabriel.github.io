@@ -225,9 +225,11 @@
 
   </body>
 
-   <script src="//d3js.org/d3.v3.min.js"" charset="utf-8">
+  <script type="text/javascript">
   let input = document.getElementById('file');
   let contents = document.getElementById('contents');
+    
+   <script src="//d3js.org/d3.v3.min.js"" charset="utf-8">
 
    function readFile () {
     let file = input.files[0];
@@ -244,10 +246,7 @@
   }
      
   </script>
-
-  <script type="text/javascript">
-
-
+    
    function more1() {
         if (document.getElementById("explain.1").style.display == "none") {
             document.getElementById("explain.1").style.display = "block";
