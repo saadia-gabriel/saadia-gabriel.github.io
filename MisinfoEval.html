@@ -222,7 +222,7 @@
 
   </body>
 
-<script>
+  <script type="text/javascript">
 
   let input = document.getElementById('file');
   let contents = document.getElementById('contents');
@@ -230,6 +230,7 @@
    function readFile () {
     let file = input.files[0];
     const reader = new FileReader();
+    console.log('reading file')
     reader.onload = function (evt) {
       console.log('reader.onload');
       headline1.innerHTML = String(evt.target.result);
@@ -238,42 +239,42 @@
   }
 
 
-  function more1() {
+   function more1() {
         if (document.getElementById("explain.1").style.display == "none") {
             document.getElementById("explain.1").style.display = "block";
             document.getElementById("num_interact1").value = parseInt(document.getElementById("num_interact1").value) + 1;
         } else {
             document.getElementById("explain.1").style.display = "none";
         }
-    }
+   }
 
-  function liked1() {
-    if (document.getElementById("is_liked1").value == "true"){
-        document.getElementById("like.1").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
-         document.getElementById("is_liked1").value = "false";
-    }        
-      else{
-        document.getElementById("like.1").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
-        document.getElementById("is_liked1").value = "true";
-      }
-    }
-
-      function shared1() {
-    if (document.getElementById("is_shared1").value == "true"){
+   function liked1() {
+     if (document.getElementById("is_liked1").value == "true"){
+       document.getElementById("like.1").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: grey; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+       document.getElementById("is_liked1").value = "false";
+     }        
+     else{
+       document.getElementById("like.1").style = "background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Facebook_Thumb_icon.svg/1200px-Facebook_Thumb_icon.svg.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; border-color: #E8E8E8; color: #333333; background-color: rgba(51, 51, 51, 0.05);";
+       document.getElementById("is_liked1").value = "true";
+     }
+   }
+    
+    function shared1() {
+      if (document.getElementById("is_shared1").value == "true"){
         document.getElementById("share.1").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
         document.getElementById("is_shared1").value = "false";
-    }
+      }
       else{
         document.getElementById("share.1").style = "background: url(https://cdn.imgbin.com/5/18/16/imgbin-emoji-paper-envelope-email-text-messaging-envelope-SJTJSd5yKke6GMvWZqekCf8YK.jpg); background-size: contain; background-repeat: no-repeat; width:100px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px;  color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
         document.getElementById("is_shared1").value = "true";
       }
     }
-
-      function flagged1() {
-    if (document.getElementById("is_flagged1").value == "true"){
+    
+    function flagged1() {
+      if (document.getElementById("is_flagged1").value == "true"){
         document.getElementById("flag.1").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: grey; background-color: rgba(51, 51, 51, 0.05);";
         document.getElementById("is_flagged1").value = "false";
-    }
+      }
       else{
         document.getElementById("flag.1").style = "background-image: url(https://images.emojiterra.com/google/android-10/512px/26a0.png); background-size: contain; background-repeat: no-repeat; width:80px; height:30px; box-shadow: 5px 10px 8px #888888; border-radius: 8px; color: #333333; border-color: #E8E8E8; background-color: rgba(51, 51, 51, 0.05);";
         document.getElementById("is_flagged1").value = "true";
