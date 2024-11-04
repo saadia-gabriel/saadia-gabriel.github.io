@@ -238,32 +238,11 @@ function upload(e) {
 
         parsedCSV.forEach(function (d, i) {
             if (i == 0) return true; // skip the header
+            console.log(d[0]);
             document.getElementById("headline1").innerText = d[0];
         });
     }
 }
-
-function download(e) {
-    data = [["id","value"]];
-
-    var f = d3.selectAll("#csvForm > input")[0];
-    f.forEach(function(d,i){
-        data.push([d.id, d.value]);
-    });
-
-    var csvContent = "data:text/csv;charset=utf-8,";
-    data.forEach(function (d, i) {
-        dataString = d.join(",");
-        csvContent += i < data.length ? dataString + "\n" : dataString;
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "FormData.csv");
-    link.click(); 
-}
-
 
   function more1() {
         if (document.getElementById("explain.1").style.display == "none") {
