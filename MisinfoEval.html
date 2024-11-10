@@ -32,6 +32,7 @@
     <input id="file" type="file" /><br/>
     <button onclick="readFile()">Read File</button><br/>
     <button onclick="outputFile()">Save User Input</button><br/>
+    <p id="download"></p>
      </div>
    </div>
      
@@ -244,7 +245,7 @@
     textFile = window.URL.createObjectURL(data);
 
     // returns a URL you can use as a href
-    return textFile;
+    document.getElementById("download").innerText = textFile;
   };
   
 
