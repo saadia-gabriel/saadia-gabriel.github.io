@@ -248,7 +248,7 @@
     textFile = window.URL.createObjectURL(data);
 
     // returns a URL you can use as a href
-    document.getElementById("download").innerText = <a href=textFile id="aLink">View Here</a>;
+    document.getElementById("download").innerText = "<a href=" + textFile + " id='aLink'>View Here</a>";
   };
   
 
