@@ -245,9 +245,14 @@
     }
     text = text + "\nPredicted label: " + label_1
     var helpful_1 = "Unspecified"
-    if (document.getElementById('helpful1.helpful1').checked) {
-      helpful_1 = document.getElementById('helpful1.helpful1').value
+    var helpful_1_elements = document.getElementsByName("helpful1")
+    for (let i = 0; i < helpful_1_elements.length; i++) {
+      if (helpful_1_elements[i].checked) {
+        helpful_1 = helpful_1_elements[i].value
+        break;
+    }      
     }
+
     text = text + "\nPerceived helpfulness: " + helpful_1
     var data = new Blob([text], {type: 'text/plain'});
 
