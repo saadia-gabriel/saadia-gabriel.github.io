@@ -244,6 +244,11 @@
       label_1 = document.getElementById('label1').value
     }
     text = text + "\nPredicted label: " + label_1
+    var helpful_1 = "Unspecified"
+    if (document.getElementById('helpful1').checked) {
+      label_1 = document.getElementById('helpful1').value
+    }
+    text = text + "\nPerceived helpfulness: " + helpful_1
     var data = new Blob([text], {type: 'text/plain'});
 
     // If we are replacing a previously generated file we need to
