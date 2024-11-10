@@ -239,6 +239,11 @@
     text = text + "\nIs liked: " + document.getElementById("is_liked1").value 
     text = text + "\nIs shared: " + document.getElementById("is_shared1").value 
     text = text + "\nIs flagged: " + document.getElementById("is_flagged1").value 
+    var label_1 = "Unspecified"
+    if (document.getElementById('label1').checked) {
+      label_1 = document.getElementById('label1').value
+    }
+    text = text + "\nPredicted label: " + label_1
     var data = new Blob([text], {type: 'text/plain'});
 
     // If we are replacing a previously generated file we need to
