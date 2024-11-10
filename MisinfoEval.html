@@ -239,11 +239,17 @@
     text = text + "\nIs liked: " + document.getElementById("is_liked1").value 
     text = text + "\nIs shared: " + document.getElementById("is_shared1").value 
     text = text + "\nIs flagged: " + document.getElementById("is_flagged1").value 
+
     var label_1 = "Unspecified"
-    if (document.getElementById('label1').checked) {
-      label_1 = document.getElementById('label1').value
+    var label_1_elements = document.getElementsByName("label1")
+    for (let i = 0; i < label_1_elements.length; i++) {
+      if (label_1_elements[i].checked) {
+        label_1 = label_1_elements[i].value
+        break;
+    }      
     }
     text = text + "\nPredicted label: " + label_1
+    
     var helpful_1 = "Unspecified"
     var helpful_1_elements = document.getElementsByName("helpful1")
     for (let i = 0; i < helpful_1_elements.length; i++) {
