@@ -233,7 +233,10 @@
 
   var textFile = null;
   function outputFile() {
-    var text = "Test"
+    var text = "Article1:\n"
+    text = text + "\nIs liked: " + document.getElementById("is_liked1").value 
+    text = text + "\nIs shared: " + document.getElementById("is_shared1").value 
+    text = text + "\nIs flagged: " + document.getElementById("is_flagged1").value 
     var data = new Blob([text], {type: 'text/plain'});
 
     // If we are replacing a previously generated file we need to
