@@ -235,23 +235,23 @@
 
   var textFile = null;
   function outputFile() {
-    var text = "Article1:\n"
-    text = text + "\nIs liked: " + document.getElementById("is_liked1").value 
-    text = text + "\nIs shared: " + document.getElementById("is_shared1").value 
-    text = text + "\nIs flagged: " + document.getElementById("is_flagged1").value 
-
-    var label_1 = "Unspecified"
-    var label_1_elements = document.getElementsByName("label1")
-    for (let i = 0; i < label_1_elements.length; i++) {
-      if (label_1_elements[i].checked) {
-        label_1 = label_1_elements[i].value
-        break;
+    var text = ""
+    for (let i = 1; i < 6; i++) {
+      text = text + "Article" + String(i) + ":\n"
+      text = text + "\nIs liked: " + document.getElementById("is_liked" + String(i)).value 
+      text = text + "\nIs shared: " + document.getElementById("is_shared" + String(i)).value 
+      text = text + "\nIs flagged: " + document.getElementById("is_flagged" + + String(i)).value 
+      var label_1 = "Unspecified"
+      var label_1_elements = document.getElementsByName("label" + String(i))
+      for (let i = 0; i < label_1_elements.length; i++) {
+        if (label_1_elements[i].checked) {
+          label_1 = label_1_elements[i].value;
+          break;
     }      
     }
     text = text + "\nPredicted label: " + label_1
-    
     var helpful_1 = "Unspecified"
-    var helpful_1_elements = document.getElementsByName("helpful1")
+    var helpful_1_elements = document.getElementsByName("helpful" + String(i))
     for (let i = 0; i < helpful_1_elements.length; i++) {
       if (helpful_1_elements[i].checked) {
         helpful_1 = helpful_1_elements[i].value
@@ -259,7 +259,10 @@
     }      
     }
 
-    text = text + "\nPerceived helpfulness: " + helpful_1
+    text = text + "\nPerceived helpfulness: " + helpful_1 + "\n"
+    }
+
+    
     var data = new Blob([text], {type: 'text/plain'});
 
     // If we are replacing a previously generated file we need to
